@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib import auth
+from django.contrib import auth, messages
 
 # Create your views here.
 def sign_up(request):
@@ -19,9 +19,15 @@ def sign_in(request):
         username = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
-        if user.is_active:
-            auth.login(request, user)
-            return redirect('/')
+        if user is not None:
+            if user.is_active:
+                auth.login(request, user)
+                messages.success(request, 'Successful')
+                return redirect('/')
+            else:
+                messages.warning(request, 'Inactive user')
+        else:
+            messages.error(request, 'Invalid username/password!')
     return render(request, 'login.html', locals())
 def sign_out(request):
     auth.logout(request)
