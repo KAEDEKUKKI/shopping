@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="container">
+  <div class="row g-5">
+    <div class="col-md-5 col-lg-4 order-md-last">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-primary">Your cart</span>
+      </h4>
+      <ul class="list-group mb-3">
+        {% for item in cart %}
+        {% with product=item.product %}
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+          <div>
+            <h6 class="my-0">{{product.name}}</h6>
+            <small class="text-muted">x{{item.quantity}}</small>
+          </div>
+          <span class="text-muted">${{item.total_price}}</span>
+        </li>
+        {% endwith %}
+        {% endfor %}
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (JPN)</span>
+          <strong>${{cart.get_total_price}}</strong>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-7 col-lg-8">
+      <h4 class="mb-3">Billing address</h4>
+      <form class="needs-validation" method="post"> {% csrf_token %}
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">First name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" name="firstName" required>
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" name="lastName" required>
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" placeholder="xxx-xxx-xxx-xxx" name="phone" required>
+            <div class="invalid-feedback">
+              Please enter your Phone.
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="address" required>
+            <div class="invalid-feedback">
+              Please enter your shipping address.
+            </div>
+          </div>
+        </div>
+        <hr class="my-4">
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
