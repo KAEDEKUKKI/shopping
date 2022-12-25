@@ -3,7 +3,7 @@
 {% load static %}
 <link href="{% static '/css/product.css'%}" rel="stylesheet">
 <div class="container-fluid py-5">
-  <div class="row px-xl-5">
+  <div class="row px-xl-5 mt-5">
     <div class="col-lg-5 pb-5">
       <div id="product-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-item active">
@@ -12,25 +12,29 @@
       </div>
     </div>
     <div class="col-lg-7 pb-5">
-      <h3 class="font-weight-semi-bold">{{product.name}}</h3>
+      <h3 class="font-weight-semi-bold mt-5">{{product.name}}</h3>
       <h3 class="font-weight-semi-bold mb-4">${{product.price}}</h3>
       <p class="mb-4">{{product.description}}</p>
       <div class="d-flex mb-3">
         <p class="text-dark font-weight-medium mb-0 mr-3">stock:</p>
-        {{product.stock}}
+        {{stock}}
       </div>
       <form class="d-flex align-items-center mb-4 pt-2" method="post"> {% csrf_token %}
+        <div class="input-group-btn">
+          <span class="btn btn-primary btn-minus" id="minus">-</span>
+        </div>
         <div class="input-group quantity mr-3" style="width: 130px;">
           <div class="wrapper">
-            <span class="btn btn-primary btn-minus" id="minus">-</span>
-            <input type="number" class="form-control text-center" value="1" name='quantity' id="num">
-            <span class="btn btn-primary btn-plus"  id="plus">+</span>
-            <script src="{% static '/js/add.js' %}"></script>
+            <input type="number" class="form-control text-center ml-2" value="1" name='quantity' id="num">
           </div>
         </div>
-        <button class="btn btn-primary px-3" name='addToCart'><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+        <div class="input-group-btn">
+          <span class="btn btn-primary btn-plus" id="plus">+</span>
+        </div>
+        <button class="btn btn-primary px-3 ml-2" name='addToCart'><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
       </form>
     </div>
   </div>
 </div>
+<script src="{% static '/js/add.js' %}"></script>
 {% endblock %}

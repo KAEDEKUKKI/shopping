@@ -1,0 +1,96 @@
+body{
+    font-family:"微軟正黑體";
+    background-size: cover;
+  }
+html{
+    scroll-behavior: smooth;
+}
+  .navbar{
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+  }
+  .btn-cart{
+    position: relative;
+    background-color: transparent;
+  }
+  .btn-cart:hover{
+    cursor: pointer;
+  }
+  .btn-cart .badge{
+    position: absolute;
+    top: 0;
+    right:0;
+  }
+  .dropdown-menu-right{
+    right:0;
+    left:auto;
+  }
+  .jumbo-bg{
+    background-image: url("../image/wwwww.png");
+    background-size: 100%;
+    background-position: center center;
+    min-height: 500px;
+    padding-top: 150px;
+  }
+  .list-group{
+    padding-top: 100px;
+  }
+  .card-bg{
+    background-size: cover;
+    background-position: center center; 
+  }
+  .bg-lighter{
+    background-color: rgba(255, 255, 255, .45);
+  }
+  .card-footer-bg{
+    background-color: transparent;
+  }
+  .box-shadow{
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .16);
+    transition: box-shadow .3s; 
+  }
+  .box-shadow:hover{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .24);
+  }
+  .btn.btn-outline-secondary.disabled{
+    pointer-events: none;
+  }
+  .sticky-top-dis{
+    top:10px;
+    margin-bottom:50px;
+  }
+  .alert-rounded{
+    border-radius: 20px;
+  }
+  .js-back-to-top{
+    display:none;
+    position:fixed;
+    right:10px;
+    bottom:30px;
+    cursor: pointer;
+    opacity: 0.5;
+    
+  }
+  .js-back-to-top:hover{
+    opacity: 1;
+  }
+  .bg-lighter{
+    margin: 0 auto;/*區塊置中*/
+  }
+  .parent {
+    display: flex;
+    /* 水平置中 */
+    justify-content: center;    
+    /* 垂直置中 */
+    align-content: center;      
+    flex-wrap: wrap;
+  }
+  .text {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  p{
+    text-align:center;
+  }

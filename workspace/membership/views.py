@@ -8,8 +8,12 @@ def sign_up(request):
         username = request.POST['username']
         email = request.POST.get('email', '')
         password = request.POST['password']
-        user = User.objects.create_user(username, email, password)
-        user.save()
+        try:
+            user = User.objects.create_user(username, email, password)
+            user.save()
+        except:
+            messages.warning(request, 'Account already exists')
+            return redirect('/register')
         return redirect('/login')
     return render(request, 'register.html', locals())
 def sign_in(request):

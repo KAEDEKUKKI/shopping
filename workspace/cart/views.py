@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from cart.cart import Cart
 from main.models import Product
-from cart.models import Order
-import hashlib, time
+from cart.order import Chumon
 
 # Create your views here.
 def cartPageView(request):
@@ -22,11 +21,9 @@ def checkoutView(request):
         lastName = request.POST['lastName']
         phone = request.POST['phone']
         address = request.POST['address']
-        block_string = str(request.user)+firstName+lastName+phone+address+str(time.time())
-        number = hashlib.sha256(block_string.encode()).hexdigest()
+        order = Chumon(request, firstName=firstName, lastName=lastName, phone=phone, address=address)
         for item in cart:
-            order_item = Order(number=number, user=request.user, first_name=firstName, last_name=lastName, phone=phone, address=address, product=item['product'], quantity=item['quantity'], price=item['price'])
-            order_item.save()
+            order.add(product=item['product'], quantity=item['quantity'], price=item['price'])
         cart.clear()
         return redirect('/')
     return render(request, 'checkout.html', locals())

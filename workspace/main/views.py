@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from main.models import Product, Category
 from cart.cart import Cart
+from main.stock import Stock
 
 # Create your views here.
 def homePageView(request):
@@ -28,10 +29,14 @@ def productView(request, product_id):
     try:
         cart = Cart(request)
         product = Product.objects.raw('select * from main_product where id = %s' % product_id)[0]
+        stock = Stock(product)
         if product is not None:
             if 'addToCart' in request.POST:
                 quantity = request.POST['quantity']
-                cart.add(product=product, quantity=int(quantity))
+                if stock.check(int(quantity), cart, product):
+                    cart.add(product=product, quantity=int(quantity))
+                else:
+                    messages.warning(request, 'bought too much')
             return render(request, 'product.html', locals())
     except:
         return redirect('/')

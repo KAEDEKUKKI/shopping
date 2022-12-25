@@ -1,14 +1,22 @@
 {% extends 'index.html' %}
 {% block content %}
+<div class="jumbotron jumbotron-fluid jumbo-bg d-flex align-items-end">
+  <div class="container">
+    <div class="bg-lighter py-3">
+      <p class="display-2"><b>買到剁手手</b></p>
+      <p class="display-4"><b>買啦哪次不買</b></p>
+    </div>
+  </div>
+</div>
 <div class="container-fluid">
   <div class="row px-xl-5">
     <!-- Category Start -->
     <div class="col-lg-3 col-md-12">
-      <div class="border-bottom mb-4 pb-4">
-        <h5 class="font-weight-semi-bold">Filter by category</h5>
+      <div class="border-bottom mb-4 pb-4 list-group sticky-top" id="myList">
+        <h5 class="font-weight-semi-bold"><b>分類</b></h5>
         <form action="" method="post"> {% csrf_token %}
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=all name="all" id="all">
+            <input class="form-check-input" type="checkbox" value="all" name="all" id="all">
             <label class="form-check-label" for="all">ALL</label>
           </div>
           {% for category in all_category %}
@@ -28,12 +36,12 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           {% for product in products %}
           <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-            <div class="card product-item border-0 mb-4">
+            <div class="card product-item border-0 box-shadow mb-4">
               <a href="/product/{{product.id}}" class="btn btn-sm text-dark p-0">
-                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                <div class="card-header h-100 border-0 product-img position-relative overflow-hidden bg-transparent border p-0">
                   <img class="img-fluid w-100" src='{{product.image.url}}' alt="">
                 </div>
-                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                <div class="card-body h-100 border-0 border-left border-right text-center p-0 pt-4 pb-3">
                   <h6 class="text-truncate mb-3">{{product.name}}</h6>
                   <div class="d-flex justify-content-center">
                     <h6>${{product.price}}</h6>
