@@ -1,5 +1,10 @@
 {% extends 'index.html' %}
 {% block content %}
+{% load static %}
+<link href="{% static '/css/product.css'%}" rel="stylesheet">
+
+
+
 <div class="container-fluid py-5">
   <div class="row px-xl-5">
     <div class="col-lg-5 pb-5">
@@ -20,12 +25,12 @@
       </div>
       <form class="d-flex align-items-center mb-4 pt-2" method="post"> {% csrf_token %}
         <div class="input-group quantity mr-3" style="width: 130px;">
-          <div class="input-group-btn">
-            <button class="btn btn-primary btn-minus">-</button>
-          </div>
-          <input type="text" class="form-control text-center" value="1" name='quantity'>
-          <div class="input-group-btn">
-            <button class="btn btn-primary btn-plus">+</button>
+          <div class="wrapper">
+
+            <span class="btn btn-primary btn-minus" id="minus">-</span>
+            <input type="number" class="form-control text-center" value="1" name='quantity' id="num">
+            <span class="btn btn-primary btn-plus"  id="plus">+</span>
+            <script src="{% static '/js/add.js' %}"></script>
           </div>
         </div>
         <button class="btn btn-primary px-3" name='addToCart'><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
@@ -33,4 +38,12 @@
     </div>
   </div>
 </div>
+
 {% endblock %}
+<div class="input-group-btn">
+  <button class="btn btn-primary btn-minus">-</button>
+</div>
+<input type="text" class="form-control text-center" value="1" name='quantity'>
+<div class="input-group-btn">
+  <button class="btn btn-primary btn-plus">+</button>
+</div>
